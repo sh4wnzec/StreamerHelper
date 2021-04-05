@@ -26,38 +26,48 @@
 
 ```json
 {
+  "StreamerHelper": {
+    "debug": false, #Debug开关
+    "roomCheckTime": 120, #房间检测间隔，秒
+    "videoPartLimitSize": 100 #小于此大小的文件不上传，MB，解决主播断流问题出现很多小切片导致上传审核失败
+  },
   "personInfo": {
     "username": "",
-    "password": ""
+    "password": "",
+    "access_token": ""
   },
   "streamerInfo": [
     {
-      "iGNing直播第一视角": {
-        "roomUrl": "https://www.huya.com/980312",
-        "tid": 21,
+      "iGNing": {
         "uploadLocalFile": true,
         "deleteLocalFile": false,
+        "roomUrl": "https://www.huya.com/980312",
+        "tid": 121,
         "tags": [
           "英雄联盟",
           "电子竞技",
           "iG"
         ]
       }
-    },
-    {
-      "罗永浩抖音直播": {
-        "roomUrl": "https://v.douyin.com/J2Nw8YM/",
-        "tid": 21,
-        "uploadLocalFile": true,
-        "tags": [
-          "网络红人",
-          "罗老师"
-        ]
-      }
     }
   ]
 }
 ```
+
+#### Docker
+
+配置文件: `/app/templates/info.json`
+
+视频目录: `/app/download`
+
+容器的保活使用docker提供的`restart`参数，不再使用PM2。
+
+DNS参数可以根据地区以及实际情况进行配置。
+
+```shell
+docker run --name stream -itd -v /path/to/config/info.json:/app/templates/info.json -v /path/to/download/:/app/download --dns 114.114.114.114 --restart always zsnmwy/streamerhelper
+```
+
 #### 安装ffmpeg
 
 mac:
@@ -110,6 +120,9 @@ npm run serve
 <a class="mr-2" href="https://github.com/bulai0408">
           <img class="d-block avatar-user" src="https://avatars1.githubusercontent.com/u/31983330?s=64&v=4" width="50" height="50" alt="@bulai0408">
 </a>
+<a class="mr-2" href="https://github.com/zsnmwy">
+          <img class="d-block avatar-user" src="https://avatars1.githubusercontent.com/u/35299017?s=64&v=4" width="50" height="50" alt="@zsnmwy">
+</a>
 
 <br>
 <br>
@@ -117,7 +130,7 @@ npm run serve
 Thanks：
   
 <div>
-<a class="mr-2" href="/ForgQi">
+<a class="mr-2" href="https://github.com/ForgQi">
           <img class="d-block avatar-user" src="https://avatars3.githubusercontent.com/u/34411314?s=64&amp;v=4" width="50" height="50" alt="@ForgQi">
 </a><a class="mr-2"  href="https://github.com/FortuneDayssss">
           <img class="d-block avatar-user" src="https://avatars2.githubusercontent.com/u/12007115?s=460&u=f6e499824dbba4197ddb5b7bf113e6641e933d6b&v=4" width="50" height="50" alt="@FortuneDayssss">
@@ -133,10 +146,11 @@ Thanks：
 - [x] 支持多个主播
 - [x] tag可配置，对应在info.json的每个主播
 - [x] 支持access_token验证，防验证码
+- [x] 重启后同时检测本地是否有上传失败的视频文件，并上传。
+- [x] 爬虫定时区间，节省服务器流量，现支持配置房间检测间隔
+- [x] 支持docker部署
+- [x] 上传文件大小监测，解决主播断流问题出现很多小切片导致上传审核失败
 - [ ] 支持twitch
-- [ ] 支持docker部署
-- [ ] 爬虫定时区间，节省服务器流量...
-- [ ] 重启后同时检测本地是否有上传失败的视频文件，并上传。
 - [ ] 增加一个独立脚本遍历download文件夹下的视频文件重新上传(重启上传的折中解决办法，还有解决第一次账号密码配置错误失败上传的问题)
 
 ## Example
