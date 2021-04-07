@@ -5,21 +5,43 @@
     "videoPartLimitSize": 100
   },
   "personInfo": {
-    "username": "",
-    "password": "",
+    "username": "奇葩唉",
+    "password": "xiong_540803",
     "access_token": ""
   },
   "streamerInfo": [
     {
-      "iGNing": {
+      "Jiutiao": {
         "uploadLocalFile": true,
         "deleteLocalFile": false,
-        "roomUrl": "https://www.huya.com/980312",
-        "tid": 121,
+        "roomUrl": "https://live.bilibili.com/46197",
+        "tid": 137,
         "tags": [
-          "英雄联盟",
-          "电子竞技",
-          "iG"
+          "舞蹈",
+          "九条月生"
+        ]
+      }
+    },
+    {
+      "Doumiao": {
+        "uploadLocalFile": true,
+        "deleteLocalFile": false,
+        "roomUrl": "https://live.bilibili.com/31194",
+        "tid": 137,
+        "tags": [
+          "聊天",
+          "Ado豆苗"
+        ]
+      }
+    },
+    {
+      "test": {
+        "uploadLocalFile": true,
+        "deleteLocalFile": false,
+        "roomUrl": "https://live.bilibili.com/22571761",
+        "tid": 137,
+        "tags": [
+          "test"
         ]
       }
     }
